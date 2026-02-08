@@ -2,8 +2,16 @@ import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
 # TODO: add necessary import
+from sklearn.ensemble import RandomForestClassifier
+import os
 
 # Optional: implement hyperparameter tuning.
+
+parameters = {
+    'n_estimators': [10, 25, 50],
+    'max_depth': [5, 10, 20]
+}
+
 def train_model(X_train, y_train):
     """
     Trains a machine learning model and returns it.
@@ -20,7 +28,11 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     # TODO: implement the function
-    pass
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+    
+    return model
+
 
 
 def compute_model_metrics(y, preds):
@@ -60,7 +72,8 @@ def inference(model, X):
         Predictions from the model.
     """
     # TODO: implement the function
-    pass
+    preds = model.predict(X)
+    return preds
 
 def save_model(model, path):
     """ Serializes model to a file.
@@ -73,12 +86,19 @@ def save_model(model, path):
         Path to save pickle file.
     """
     # TODO: implement the function
-    pass
+    model_path = os.path.join(path, 'rf_model.pkl')    
+    with open(model_path, 'wb') as f:
+        pickle.dump(model, f)
+
 
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
     # TODO: implement the function
-    pass
+    model_path = os.path.join(path, 'rf_model.pkl')
+    with open(model_path, 'rb') as f:
+        rf_model = pickle.load(f)
+    
+    return rf_model
 
 
 def performance_on_categorical_slice(
