@@ -40,10 +40,14 @@ X_train, y_train, encoder, lb = process_data(
     # use the train dataset 
     # use training=True
     # do not need to pass encoder and lb as input
+    X=train,
+    categorical_features=cat_features,
+    label='salary',
+    training=True
     )
 
 X_test, y_test, _, _ = process_data(
-    test,
+    X=test,
     categorical_features=cat_features,
     label="salary",
     training=False,
@@ -52,7 +56,7 @@ X_test, y_test, _, _ = process_data(
 )
 
 # TODO: use the train_model function to train the model on the training dataset
-model = None # your code here
+model = train_model(X_train, y_train) # your code here
 
 # save the model and the encoder
 model_path = os.path.join(project_path, "model", "model.pkl")
@@ -66,7 +70,7 @@ model = load_model(
 ) 
 
 # TODO: use the inference function to run the model inferences on the test dataset.
-preds = None # your code here
+preds = inference(model, X_test) # your code here
 
 # Calculate and print the metrics
 p, r, fb = compute_model_metrics(y_test, preds)
