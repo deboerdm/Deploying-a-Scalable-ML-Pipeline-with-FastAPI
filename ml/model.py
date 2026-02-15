@@ -7,10 +7,6 @@ import os
 
 # Optional: implement hyperparameter tuning.
 
-parameters = {
-    'n_estimators': [10, 25, 50],
-    'max_depth': [5, 10, 20]
-}
 
 def train_model(X_train, y_train):
     """
@@ -86,7 +82,7 @@ def save_model(model, path):
         Path to save pickle file.
     """
     # TODO: implement the function
-    model_path = os.path.join(path, 'rf_model.pkl')    
+    model_path = os.path.join(path)    
     with open(model_path, 'wb') as f:
         pickle.dump(model, f)
 
@@ -94,7 +90,7 @@ def save_model(model, path):
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
     # TODO: implement the function
-    model_path = os.path.join(path, 'rf_model.pkl')
+    model_path = os.path.join(path)
     with open(model_path, 'rb') as f:
         rf_model = pickle.load(f)
     
