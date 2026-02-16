@@ -27,13 +27,15 @@ data = {
     "capital-gain": 0,
     "capital-loss": 0,
     "hours-per-week": 40,
-    "native-country": "United-States",
+    "native-country": "United-States"
 }
 
 # TODO: send a POST using the data above
-r = requests.post(url, data) # Your code here
+url = 'http://127.0.0.1:8000/data/'
+r = requests.post(url, data=json.dumps(data)) # Your code here
 
 # TODO: print the status code
 print(f'Status Code: {r.status_code}')
 # TODO: print the result
-print(f'Result: {r.text}')
+print(f'Result: {r.json()["result"]}')
+
